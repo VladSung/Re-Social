@@ -1,6 +1,6 @@
 header {
     text-align: center;
-    padding: 15px;
+    padding: 4px 15px;
     background: #171a21;
     display: flex;
     align-items: center;
@@ -10,4 +10,34 @@ header {
 header img {
     max-height: 100%;
     margin-right: 15px;
+    filter: hue-rotate(255deg);
+}
+.menuBtn{
+    width: 32px;
+    height: 32px;
+    margin-right: 15px;
+    border: 0;
+    padding: 10px;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.menuBtn span, span:before, span:after{
+    display: block;
+    height: 2px;
+    width: 22px;
+    background: #fff;
+}
+.menuBtn span:before{
+    content: '';
+    position: absolute;
+    top: 8px;
+}
+.menuBtn span:after{
+    content: '';
+    position: absolute;
+    bottom: 8px;
 }

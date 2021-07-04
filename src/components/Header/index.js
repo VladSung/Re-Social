@@ -1,11 +1,15 @@
 import React from 'react';
 import './header.css'
+import Logo from './../../logo.png'
 
-function Header() {
+function Header({ toggleMenuOpen }) {
     return (
         <>
             <header>
-                <img src='https://i.pinimg.com/236x/48/a2/11/48a21167d141a926c43755b7d8309b76.jpg' />
+                <button className='menuBtn' onClick={() => toggleMenuOpen()}>
+                    <span></span>
+                </button>
+                <img src={Logo} />
                 <p>Re: Social</p>
             </header>
         </>

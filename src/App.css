@@ -1,15 +1,18 @@
-#root {
-    display: grid;
-    grid-template-areas: "header header";
-    grid-template-columns: 2fr 8fr;
-    grid-template-rows: 60px 1fr;
-    min-height: 100vh;
-}
 header {
-    grid-area: header;
+    height: 60px;
+    box-shadow: 0px 0px 13px 0px #171a21;
 }
-
-main {
-    padding: 15px 0;
+.menuOpen nav{
+    left: 0;
+}
+.main {
     color: #30343f;
+    transition: 300ms;
+    margin-left: 0;
+}
+.menuOpen .main{
+    margin-left: 200px;
+}
+.menuOpen .main.dialogs{
+    width: calc(100vw - 200px);
 }

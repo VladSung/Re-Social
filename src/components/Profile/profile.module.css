@@ -1,0 +1,12 @@
+.bg{
+    display: flex;
+    height: 40vh;
+    max-height: 500px;
+    width: 100%;
+    overflow: hidden;
+    transition: 300ms;
+}
+.bgImg {
+    width: 100%;
+    object-fit: cover;
+}
