@@ -1,10 +1,23 @@
+let rerenderEntireTree = () => { };
 let state = {
     profilePage: {
         profile: {
             id: 777,
-            photo: 'https://pixelbox.ru/wp-content/uploads/2021/02/youtube-avatar-anime-29.jpg',
+            name: 'Acoustic',
+            photo: 'https://sun1-30.userapi.com/impg/TtPvnFLHJppwH9DnZRgu5L8E0DOSJmdykQQkiw/LzTIkBJDX7Q.jpg?size=304x146&quality=96&sign=51c48ec780e2344d35542000d76eae46&type=album',
             bg: 'https://sun9-4.userapi.com/impg/Ek40Lv6bhx2KleQEe64xZ9hju-crvO7Hx0dZfg/Bw0nosDxQPA.jpg?size=1200x752&quality=96&sign=db4977c430eaa2ff61cd3771bc234c7c&type=album',
         },
+        posts: [
+            {
+                id: 1,
+                message: 'HHH'
+            },
+            {
+                id: 2,
+                message: 'Hed'
+            },
+        ],
+        newPostText: 'SomeLikeHot',
     },
     dialogsPage: {
         dialogs: [
@@ -32,18 +45,38 @@ let state = {
         messages: [
             {
                 id: 1,
-                messages: [
-                    'zed',
-                ],
+                message: 'Hi',
             },
             {
                 id: 777,
-                messages: [
-                    'CRUEL',
-                ]
+                message: `H? I know you? what the fck? who is? 800 лет назад, 3 000 пространственных врат открылись по всему миру. Как будто 3 000 разноцветных глаз открылись и монстры хлынули из них, словно слёзы. Некоторые могли одним ударом уничтожить городские стены, тела их были гигантские и питались они людьми. 
+                И ты помер`
             }
         ],
+        newMessageText: 'Xai',
     },
-
+    sidebar: {
+        menuOpen: true,
+    }
 }
-export default state
+window.state = state;
+
+export let addPost = () => {
+    let newPost = {
+        id: 4,
+        message: state.profilePage.newPostText,
+    };
+    state.profilePage.posts.push(newPost);
+    state.profilePage.newPostText = '';
+    rerenderEntireTree(state);
+}
+export let updateNewPostText = (text) => {
+    state.profilePage.newPostText = text;
+    rerenderEntireTree(state);
+}
+export let updateNewMessageText = (text) => {
+    state.dialogsPage.newMessageText = text;
+    rerenderEntireTree(state);
+}
+
+export default state;

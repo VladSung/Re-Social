@@ -1,6 +1,6 @@
 import React from 'react';
 import './header.css'
-import Logo from './../../logo.png'
+import Logo from './../../logo.svg'
 
 function Header({ toggleMenuOpen }) {
     return (

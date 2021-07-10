@@ -10,7 +10,6 @@ header {
 header img {
     max-height: 100%;
     margin-right: 15px;
-    filter: hue-rotate(255deg);
 }
 .menuBtn{
     width: 32px;
