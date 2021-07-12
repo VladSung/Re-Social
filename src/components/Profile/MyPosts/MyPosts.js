@@ -7,9 +7,8 @@ const MyPosts = (props) => {
     return (
         <div className='myPosts'>
             <PostForm
-                addPost={props.addPost}
+                dispatch={props.dispatch}
                 newPostText={props.newPostText}
-                updateNewPostText={props.updateNewPostText}
             />
             <div className='myPosts__list'>
                 {Posts}

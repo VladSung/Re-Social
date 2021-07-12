@@ -14,7 +14,7 @@ function Profile(props) {
                 addPost={props.addPost}
                 posts={props.posts}
                 newPostText={props.newPostText}
-                updateNewPostText={props.updateNewPostText}
+                dispatch={props.dispatch}
             />
         </div>
     );

@@ -11,7 +11,6 @@ function Messages(props) {
             return (<Message user={props.profile} message={e.message}></Message>)
         }
     })
-    console.log(props.messages)
     return (
         <div className={styles.messagesContent}>
             {messagesData}

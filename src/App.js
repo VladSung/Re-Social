@@ -10,23 +10,18 @@ import Profile from './components/Profile/Profile';
 import Dialogs from './components/Dialogs/Dialogs'
 
 function App(props) {
-  const [menuOpen, setMenuOpen] = useState(props.state.sidebar.menuOpen);
-  const toggleMenuOpen = () => {
-    setMenuOpen(!menuOpen)
-  }
   return (
     <>
-      <div className={menuOpen ? 'menuOpen' : ''}>
-        <Header toggleMenuOpen={toggleMenuOpen} />
+      <div className={'menuOpen'}>
+        <Header toggleMenuOpen={() => { }} />
         <Navbar />
         <Switch>
-          <Route exact path={'/profile'}>
+          <Route path={'/profile'}>
             <Profile
               profile={props.state.profilePage.profile}
               newPostText={props.state.profilePage.newPostText}
-              updateNewPostText={props.updateNewPostText}
               posts={props.state.profilePage.posts}
-              addPost={props.addPost}
+              dispatch={props.dispatch}
             ></Profile>
           </Route>
           <Route path={'/dialogs'}>
@@ -34,8 +29,8 @@ function App(props) {
               dialogs={props.state.dialogsPage.dialogs}
               messages={props.state.dialogsPage.messages}
               profile={props.state.profilePage.profile}
-              newMessageText={props.state.dialogsPage.newMessageText}
-              updateNewMessageText={props.updateNewMessageText}
+              newMessageBody={props.state.dialogsPage.newMessageBody}
+              dispatch={props.dispatch}
             ></Dialogs>
           </Route>
         </Switch>
