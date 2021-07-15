@@ -18,10 +18,7 @@ function App(props) {
         <Switch>
           <Route path={'/profile'}>
             <Profile
-              profile={props.state.profilePage.profile}
-              newPostText={props.state.profilePage.newPostText}
-              posts={props.state.profilePage.posts}
-              dispatch={props.dispatch}
+              store={props.store}
             ></Profile>
           </Route>
           <Route path={'/dialogs'}>

@@ -1,20 +1,13 @@
 import React from 'react';
-import MyPosts from './MyPosts/MyPosts';
-import styles from './profile.module.css';
-import ProfileInfo from './ProfileInfo/ProfileInfo'
+import MyPostsContainer from './MyPosts/MyPostsContainer';
+import ProfileInfoContainer from './ProfileInfo/ProfileInfoContainer'
 
-function Profile(props) {
+function Profile({ store }) {
     return (
         <div className='main'>
-            <div className={styles.bg}>
-                <img className={styles.bgImg} src={props.profile.bg} />
-            </div>
-            <ProfileInfo profile={props.profile} />
-            <MyPosts
-                addPost={props.addPost}
-                posts={props.posts}
-                newPostText={props.newPostText}
-                dispatch={props.dispatch}
+            <ProfileInfoContainer store={store} />
+            <MyPostsContainer
+                store={store}
             />
         </div>
     );
