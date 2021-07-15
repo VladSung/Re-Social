@@ -5,15 +5,14 @@ import Messages from './Messages/Messages';
 import { Button } from '@material-ui/core'
 import SendIcon from '@material-ui/icons/Send';
 import { TextField } from '@material-ui/core';
-import { updateNewMessageBodyCreator, sendMessageCreator } from './../../redux/dialogs-reducer'
 
 function Dialogs(props) {
     const setNewMessageBody = (e) => {
         let text = (e.target.value)
-        props.dispatch(updateNewMessageBodyCreator(text))
+        props.updateNewMessageBody(text)
     };
     const sendMessage = () => {
-        props.dispatch(sendMessageCreator())
+        props.sendMessage()
     }
     return (
         <div className={`main dialogs ${styles.main}`}>

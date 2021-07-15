@@ -7,7 +7,7 @@ import './App.css';
 import Header from './components/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
-import Dialogs from './components/Dialogs/Dialogs'
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 function App(props) {
   return (
@@ -22,13 +22,9 @@ function App(props) {
             ></Profile>
           </Route>
           <Route path={'/dialogs'}>
-            <Dialogs
-              dialogs={props.state.dialogsPage.dialogs}
-              messages={props.state.dialogsPage.messages}
-              profile={props.state.profilePage.profile}
-              newMessageBody={props.state.dialogsPage.newMessageBody}
-              dispatch={props.dispatch}
-            ></Dialogs>
+            <DialogsContainer
+              store={props.store}
+            />
           </Route>
         </Switch>
       </div>
