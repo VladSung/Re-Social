@@ -1,13 +1,12 @@
 import React from 'react';
-import MyPostsContainer from './MyPosts/MyPostsContainer';
-import ProfileInfoContainer from './ProfileInfo/ProfileInfoContainer'
+import MyPosts from './MyPosts/MyPosts';
+import ProfileInfo from './ProfileInfo/ProfileInfo'
 
-function Profile({ store }) {
+function Profile(props) {
     return (
         <div className='main'>
-            <ProfileInfoContainer store={store} />
-            <MyPostsContainer
-                store={store}
+            <ProfileInfo profile={props.profile} />
+            <MyPosts {...props}
             />
         </div>
     );

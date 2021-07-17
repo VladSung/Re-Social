@@ -4,20 +4,14 @@ import './index.css';
 import App from './App';
 import store from './redux/redux-store';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
-let rerenderEntireTree = () => {
-    ReactDOM.render(
-        <>
-            <Router>
-                <App
-                    state={store.getState()}
-                    store={store}
-                    dispatch={store.dispatch.bind(store)}
-                />
-            </Router>
-        </>,
-        document.getElementById('App')
-    );
-};
-rerenderEntireTree();
-store.subscribe(rerenderEntireTree);
+
+ReactDOM.render(
+    <Router>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </Router>,
+    document.getElementById('App')
+);

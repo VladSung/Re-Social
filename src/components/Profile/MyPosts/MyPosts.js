@@ -2,10 +2,11 @@ import React from 'react';
 import Post from './Post/Post'
 
 const MyPosts = (props) => {
-    const Posts = props.posts.map((e) => <Post message={e.message} />)
+    const Posts = props.posts ? props.posts.map((e) => <Post key={e.id} message={e.message} />)
+        : "Нет Постов";
     const postChange = (e) => {
         let text = e.target.value;
-        props.updateNewPostText(text)
+        props.updatePostText(text)
     };
     const addPost = () => props.addPost();
 

@@ -27,10 +27,12 @@ let initialState = {
     messages: [
         {
             id: 1,
+            userId: 1,
             message: 'Hi',
         },
         {
-            id: 777,
+            id: 2,
+            userId: 777,
             message: `H? I know you? what the fck? who is? 800 лет назад, 3 000 пространственных врат открылись по всему миру. Как будто 3 000 разноцветных глаз открылись и монстры хлынули из них, словно слёзы. Некоторые могли одним ударом уничтожить городские стены, тела их были гигантские и питались они людьми. 
             И ты помер`
         }
@@ -41,20 +43,24 @@ let initialState = {
 function dialogsReducer(state = initialState, action) {
     switch (action.type) {
         case UPDATE_MESSAGE_BODY:
-            state.newMessageBody = action.body;
-            return state
+            return {
+                ...state,
+                newMessageBody: action.body,
+            }
         case SEND_MESSAGE:
-            let message = { id: 77, message: state.newMessageBody }
-            state.newMessageBody = ''
-            state.messages.push(message)
-            return state
+            let message = { id: 77, userId: 777, message: state.newMessageBody }
+            return {
+                ...state,
+                newMessageBody: '',
+                messages: [...state.messages, message]
+            }
         default:
             return state
     }
 }
 
-export const updateNewMessageBodyCreator = (body) =>
+export const updateNewMessageBody = (body) =>
     ({ type: UPDATE_MESSAGE_BODY, body: body })
-export const sendMessageCreator = () => ({ type: SEND_MESSAGE })
+export const sendMessage = () => ({ type: SEND_MESSAGE })
 
 export default dialogsReducer;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Switch,
   Route
@@ -6,10 +6,12 @@ import {
 import './App.css';
 import Header from './components/Header';
 import Navbar from './components/Navbar/Navbar';
-import Profile from './components/Profile/Profile';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
+import UsersContainer from './components/Users/UsersContainer';
+import ProfileContainer from './components/Profile/ProfileContainer';
 
-function App(props) {
+
+function App() {
   return (
     <>
       <div className={'menuOpen'}>
@@ -17,14 +19,13 @@ function App(props) {
         <Navbar />
         <Switch>
           <Route path={'/profile'}>
-            <Profile
-              store={props.store}
-            ></Profile>
+            <ProfileContainer />
           </Route>
           <Route path={'/dialogs'}>
-            <DialogsContainer
-              store={props.store}
-            />
+            <DialogsContainer />
+          </Route>
+          <Route path={'/users'}>
+            <UsersContainer />
           </Route>
         </Switch>
       </div>

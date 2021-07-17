@@ -20,7 +20,7 @@ function Dialogs(props) {
 
                 <div className={styles.dialogs}>
                     <ul>
-                        <Dialog dialogs={props.dialogs}></Dialog>
+                        <Dialog dialogs={props.dialogsPage.dialogs}></Dialog>
                     </ul>
 
                 </div>
@@ -29,7 +29,7 @@ function Dialogs(props) {
                         <h2>user</h2>
                         <p>. . .</p>
                     </div>
-                    <Messages profile={props.profile} dialogs={props.dialogs} messages={props.messages} />
+                    <Messages profile={props.profile} dialogs={props.dialogsPage.dialogs} messages={props.dialogsPage.messages} />
                     <div className={styles.newMessage}>
                         <TextField
                             id="standard-textarea"
@@ -41,7 +41,7 @@ function Dialogs(props) {
                             }}
                             className={styles.messageInput}
                             multiline onChange={setNewMessageBody}
-                            value={props.newMessageBody}
+                            value={props.dialogsPage.newMessageBody}
                             placeholder='Введите сообщение...'>
                         </TextField>
                         <Button onClick={sendMessage} className={styles.button}>

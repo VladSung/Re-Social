@@ -4,7 +4,7 @@ function Message(props) {
         return (
             <div className={`${styles.message} ${styles.meMessage}`}>
                 <div className={styles.userPhoto}>
-                    <img src={profile.photo} />
+                    <img src={profile.photo} alt='' />
                 </div>
                 <div className={styles.messageText}>{message}</div>
             </div>
@@ -15,7 +15,7 @@ function Message(props) {
             <div className={styles.messagesContent}>
                 <div className={`${styles.message} ${styles.userMessage}`}>
                     <div className={styles.userPhoto}>
-                        <img src={user.photo} />
+                        <img src={user.photo} alt='' />
                     </div>
                     <div>
                         <div className={styles.authorName}>

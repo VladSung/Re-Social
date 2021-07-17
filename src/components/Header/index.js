@@ -9,7 +9,7 @@ function Header({ toggleMenuOpen }) {
                 <button className='menuBtn' onClick={() => toggleMenuOpen()}>
                     <span></span>
                 </button>
-                <img src={Logo} />
+                <img src={Logo} alt='Logo' />
                 <p>Re: Social</p>
             </header>
         </>
