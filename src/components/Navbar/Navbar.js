@@ -15,6 +15,9 @@ function Navbar() {
                     <NavLink activeClassName={styles.active} to="/dialogs">Сообщения</NavLink>
                 </li>
                 <li className={styles.navbar__item}>
+                    <NavLink activeClassName={styles.active} to="/users">Пользователи</NavLink>
+                </li>
+                <li className={styles.navbar__item}>
                     <NavLink activeClassName={styles.active} to="/news">Новости</NavLink>
                 </li>
                 <li className={styles.navbar__item}>

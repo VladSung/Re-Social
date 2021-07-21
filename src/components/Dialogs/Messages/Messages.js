@@ -8,7 +8,7 @@ function Messages(props) {
             return (<Message key={e.id} meMessage={true} profile={props.profile} message={e.message}></Message>
             )
         } else {
-            return (<Message user={props.profile} message={e.message}></Message>)
+            return (<Message key={e.id} user={props.profile} message={e.message}></Message>)
         }
     })
     return (

@@ -49,9 +49,6 @@
 .actions{
     margin-left: auto;
 }
-.button{
-    font-size: 12px;
-}
 .pagination{
     display: flex;
     gap: 10px;

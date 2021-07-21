@@ -9,6 +9,11 @@ const Users = (props) => {
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
+    let toggleFollow = (userId) => {
+        let [user] = props.users.filter(u => u.id === userId);
+        props.toggleFollow(userId, user.followed)
+
+    }
     return (<>
         <div className={styles.pagination}>
             {pages.map((p) => {
@@ -32,9 +37,12 @@ const Users = (props) => {
                     </div>
                     <div className={styles.actions}>
                         <Button
-                            variant="outlined"
+                            variant={u.followed ? 'outlined' : 'contained'}
+                            disabled={props.followFetching.some(id => id === u.id)}
+                            style={props.followFetching.some(id => id === u.id) ? { filter: 'invert(1)' } : {}}
+                            size='small'
                             color='primary'
-                            onClick={() => props.toggleFollow(u.id)}
+                            onClick={() => toggleFollow(u.id)}
                             className={styles.button}>{u.followed ? 'Отписаться' : 'Подписаться'}</Button>
                     </div>
                 </div>

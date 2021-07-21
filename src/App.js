@@ -4,7 +4,7 @@ import {
   Route
 } from 'react-router-dom';
 import './App.css';
-import Header from './components/Header';
+import Header from './components/Header/HeaderContainer';
 import Navbar from './components/Navbar/Navbar';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
@@ -17,17 +17,22 @@ function App() {
       <div className={'menuOpen'}>
         <Header toggleMenuOpen={() => { }} />
         <Navbar />
-        <Switch>
-          <Route path={'/profile'}>
-            <ProfileContainer />
-          </Route>
-          <Route path={'/dialogs'}>
-            <DialogsContainer />
-          </Route>
-          <Route path={'/users'}>
-            <UsersContainer />
-          </Route>
-        </Switch>
+        <div className='main'>
+          <Switch>
+            <Route path={'/profile/:userId?'}>
+              <ProfileContainer />
+            </Route>
+            <Route path={'/dialogs'}>
+              <DialogsContainer />
+            </Route>
+            <Route path={'/users'}>
+              <UsersContainer />
+            </Route>
+            <Route path={'/login'}>
+              <h2>Login</h2>
+            </Route>
+          </Switch>
+        </div>
       </div>
     </>
   );

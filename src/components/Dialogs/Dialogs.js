@@ -15,7 +15,7 @@ function Dialogs(props) {
         props.sendMessage()
     }
     return (
-        <div className={`main dialogs ${styles.main}`}>
+        <div className={`dialogs ${styles.main}`}>
             <div className={styles.wrapper}>
 
                 <div className={styles.dialogs}>
@@ -50,7 +50,7 @@ function Dialogs(props) {
                     </div>
                 </div>
             </div>
-        </div >
+        </div>
     );
 }
 
