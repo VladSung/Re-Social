@@ -1,18 +1,14 @@
 import React from 'react';
-import Preloader from '../common/Preloader/Preloader';
+import { Grid } from '@material-ui/core';
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 
 function Profile(props) {
     return (
-        <div>
-            {props.profile
-                ? <>
-                    <ProfileInfo updateStatus={props.updateStatus} profile={props.profile} status={props.status} />
-                    <MyPosts {...props} />
-                </>
-                : <Preloader />}
-        </div>
+        <Grid>
+            <ProfileInfo updateStatus={props.updateStatus} profile={props.profile} status={props.status} />
+            <MyPosts {...props} />
+        </Grid>
     );
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
+import { Button, Pagination } from '@material-ui/core';
 import styles from './users.module.css';
 import { Link } from 'react-router-dom';
 
@@ -9,17 +9,18 @@ const Users = (props) => {
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
+    let onPaginationClick = (p) => {
+        if (p !== props.currentPage) {
+            props.onPaginationClick(p)
+        }
+    }
     let toggleFollow = (userId) => {
         let [user] = props.users.filter(u => u.id === userId);
         props.toggleFollow(userId, user.followed)
 
     }
     return (<>
-        <div className={styles.pagination}>
-            {pages.map((p) => {
-                return <button key={p} onClick={() => props.onPaginationClick(p)} className={props.currentPage === p ? `${styles.selectedPage} ${styles.paginationButton}` : styles.paginationButton} >{p}</button>
-            })}
-        </div>
+        <Pagination onChange={(e, p) => onPaginationClick(p)} className={styles.pagination} count={pagesCount} shape="rounded" />
         {props.users.map((u) =>
             <div key={u.id} className={styles.header}>
                 <div className={styles.container}>

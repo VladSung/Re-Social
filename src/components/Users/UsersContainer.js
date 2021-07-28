@@ -5,7 +5,6 @@ import {
     toggleFollow,
     getUsers,
 } from '../../redux/users-reducer';
-import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import Preloader from '../common/Preloader/Preloader';
 import { compose } from 'redux';
 
@@ -52,5 +51,4 @@ export default compose(
         toggleFollow,
         getUsers,
     }),
-    withAuthRedirect
 )(UsersContainer)

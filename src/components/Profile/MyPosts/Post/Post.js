@@ -1,8 +1,9 @@
+import { Typography } from '@material-ui/core';
 import React from 'react';
 
 const Post = (props) => (
     <div>
-        {props.message}
+        <Typography>{props.message}</Typography>
     </div>
 )
 export default Post;

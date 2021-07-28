@@ -1,5 +1,5 @@
-import React, { setState } from 'react';
-import { Input } from '@material-ui/core';
+import React from 'react';
+import { Input, Typography } from '@material-ui/core';
 
 class ProfileStatus extends React.Component {
     constructor(props) {
@@ -43,13 +43,13 @@ class ProfileStatus extends React.Component {
     render() {
         return <>
             {this.state.editMode && <Input
-                style={{ color: '#fff', width: '100%', background: 'rgb(255 255 255 /20%)', padding: '0 15px' }}
+                style={{ width: '100%', padding: '0 15px' }}
                 value={this.state.status}
                 onKeyDown={this.onKeyDown}
                 autoFocus={true}
                 onChange={(e) => { this.editStatus(e.target.value) }} onBlur={this.deactivatedEditMode} />
             }
-            {!this.state.editMode && <span onDoubleClick={this.activatedEditMode}>{this.state.status || 'Нет статуса'}</span>}
+            {!this.state.editMode && <Typography onDoubleClick={this.activatedEditMode}>{this.state.status || 'Нет статуса'}</Typography>}
 
         </>
     }

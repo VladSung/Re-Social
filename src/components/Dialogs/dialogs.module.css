@@ -96,3 +96,6 @@ h2{
     width: 40px;
     height: 40px;
 }
+.disabledButton{
+    filter: invert(1);
+}

@@ -9,9 +9,8 @@
 }
 .header{
     width: 100%;
-    color: #fff;
-    background: #000;
-    margin-bottom: 2px;
+    background: #fff;
+    border-bottom: 1px solid rgba(50, 50, 50, 50%);
     padding: 10px;
 }
 .userProfile{
@@ -50,20 +49,6 @@
     margin-left: auto;
 }
 .pagination{
-    display: flex;
-    gap: 10px;
-    padding: 10px;
-    max-width: 100%;
-    overflow: auto;
-}
-.paginationButton{
-    padding: 5px 10px;
-    background: var(--bg2-color);
-    border: 0;
-    color: var(--color);
-}
-.selectedPage{
-    font-weight: 700;
-    color: var(--bg2-color);
-    background: var(--color);
+    padding: 8px 16px;
+    width: 100%;
 }

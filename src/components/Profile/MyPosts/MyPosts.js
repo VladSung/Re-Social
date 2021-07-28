@@ -1,27 +1,36 @@
 import React from 'react';
 import Post from './Post/Post'
+import MyPostsForm from './MyPostsForm'
+import { Container, Paper } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        display: 'flex',
+        width: '100%',
+    },
+    list: {
+        padding: '10px 15px',
+        background: theme.palette.background.default,
+    }
+}))
 
 const MyPosts = (props) => {
+    const classes = useStyles()
     const Posts = props.posts ? props.posts.map((e) => <Post key={e.id} message={e.message} />)
         : "Нет Постов";
-    const postChange = (e) => {
-        let text = e.target.value;
-        props.updatePostText(text)
-    };
-    const addPost = () => props.addPost();
 
     return (
-        <div className='myPosts'>
-            <div>
-                <input
-                    onChange={postChange}
-                    value={props.newPostText} />
-                <button onClick={addPost}>addPost</button>
-            </div>
-            <div className='myPosts__list'>
-                {Posts}
-            </div>
-        </div>
+        <Paper>
+            <Container maxWidth='md' className={classes.root}>
+                <div>
+                    <MyPostsForm addPost={props.addPost} />
+                </div>
+                <div className={classes.list}>
+                    {Posts}
+                </div>
+            </Container>
+        </Paper>
     );
 };
 export default MyPosts;

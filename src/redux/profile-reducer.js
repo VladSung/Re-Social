@@ -1,7 +1,6 @@
 import { profileAPI } from '../Api/Api'
 
 const ADD_POST = 'ADD-POST'
-const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT'
 const SET_PROFILE = 'SET_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 
@@ -12,25 +11,14 @@ let initialState = {
         large: '',
     },
     posts: [],
-    newPostText: 'SomeLikeHot',
     status: ''
 };
 function profileReducer(state = initialState, action) {
     switch (action.type) {
         case ADD_POST:
-            let newPost = {
-                id: 4,
-                message: state.newPostText,
-            };
             return {
                 ...state,
-                posts: [...state.posts, newPost],
-                newPostText: ''
-            }
-        case UPDATE_POST_TEXT:
-            return {
-                ...state,
-                newPostText: action.text
+                posts: [...state.posts, action.newPost]
             }
         case SET_PROFILE:
             return {
@@ -47,19 +35,25 @@ function profileReducer(state = initialState, action) {
     }
 }
 
-export const addPost = () => ({ type: ADD_POST })
-export const updatePostText = (text) =>
-    ({ type: UPDATE_POST_TEXT, text: text })
+export const addPostSuccess = (newPost) => ({ type: ADD_POST, newPost })
 export const setProfile = (profile) => ({ type: SET_PROFILE, profile })
 export const setStatus = (status) => ({ type: SET_STATUS, status })
 
 export const getProfile = (userId) => (dispatch) => {
+    if (userId === 'initialize') {
+        dispatch(setProfile({}));
+        return;
+    }
     profileAPI.getProfile(userId)
         .then(data => {
             dispatch(setProfile(data));
         })
 }
 export const getStatus = (userId) => (dispatch) => {
+    if (userId === 'initialize') {
+        dispatch(setProfile({}));
+        return;
+    }
     profileAPI.getStatus(userId)
         .then(data => {
             dispatch(setStatus(data));
@@ -72,6 +66,13 @@ export const updateStatus = (status) => (dispatch) => {
                 dispatch(setStatus(status))
             }
         })
+}
+export const addPost = (postBody) => (dispatch) => {
+    const newPost = {
+        id: Math.floor(Math.random() * 10000),
+        message: postBody,
+    }
+    dispatch(addPostSuccess(newPost))
 }
 
 export default profileReducer

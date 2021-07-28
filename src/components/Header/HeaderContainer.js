@@ -1,21 +1,16 @@
 import React from 'react';
 import Header from './Header'
-import { connect } from 'react-redux';
-import { getAuthData } from '../../redux/auth-reducer';
+import { useSelector, shallowEqual } from 'react-redux';
 
-class HeaderContainer extends React.Component {
-    componentDidMount() {
-        this.props.getAuthData();
-    }
-    render() {
-        return (
-            <Header isAuth={this.props.isAuth} login={this.props.login} />
-        )
-    }
+function HeaderContainer(props) {
+    let { menuOpen } = props
+    let isAuth = useSelector(state => state.auth.isAuth, shallowEqual)
+    let login = useSelector(state => state.auth.login, shallowEqual)
+    return (
+        <Header
+            isAuth={isAuth}
+            login={login}
+            menuOpen={menuOpen} />
+    )
 }
-let mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth,
-    login: state.auth.login
-})
-
-export default connect(mapStateToProps, { getAuthData })(HeaderContainer);
+export default HeaderContainer;
