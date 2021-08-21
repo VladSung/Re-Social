@@ -1,28 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Switch,
-  Route,
-  withRouter
+  useLocation,
 } from 'react-router-dom';
-import { connect } from 'react-redux';
-import './App.css';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { makeStyles } from '@material-ui/styles';
-import { withTheme } from './components/common/Theme/Theme';
+import { useDispatch, useSelector } from 'react-redux';
+import { withTheme } from './components/common/Theme/Theme'
+import { initializeApp } from './redux/app-reducer';
+
 import Header from './components/Header/HeaderContainer';
 import Navbar from './components/Navbar/Navbar';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
-import UsersContainer from './components/Users/UsersContainer';
-import ProfileContainer from './components/Profile/ProfileContainer';
-import Login from './components/Login/Login';
-import { CircularProgress, Grid, Paper, Typography } from '@material-ui/core';
-import { initializeApp } from './redux/app-reducer';
-import { compose } from 'redux';
+import Routes from './components/Routes/Routes';
+
+import { makeStyles } from '@material-ui/styles';
+import { Box, CircularProgress, Grid, Typography } from '@material-ui/core';
+
 
 const useStyles = makeStyles((theme) => {
   return {
     root: {
       minHeight: '100vh',
+    },
+    fullWidth: {
+      margin: 0,
     },
     main: {
       marginLeft: 240,
@@ -46,51 +44,33 @@ const useStyles = makeStyles((theme) => {
 })
 
 function App(props) {
-  let [menuOpen, setMenuOpen] = useState(true);
-  let { initialized, initializeApp } = props
+  const location = useLocation()
+  const dispatch = useDispatch()
+  const initialized = useSelector((state) => state.app.initialized)
+  const [menuOpen, setMenuOpen] = useState(false);
   const classes = useStyles(props);
-  useEffect(() => {
-    initializeApp()
-  }, [initializeApp])
+  const onMenuBtnClick = () => {
+    setMenuOpen(!menuOpen)
+  }
 
+  useEffect(() => {
+    dispatch(initializeApp())
+  }, [dispatch])
   if (!initialized) return <div className={classes.banner}>
     <CircularProgress size='4rem' />
     <Typography variant='body1'>Приложение загружается, пожалуйста подождите...</Typography>
   </div>
-
   return (
-    <Paper>
-      <Grid className={`${classes.root} ${menuOpen ? 'menuOpen' : ''}`}>
-        <CssBaseline />
-        <Header menuOpen={menuOpen} />
-        <Navbar setMenuOpen={setMenuOpen} menuOpen={menuOpen} />
-        <Paper className={menuOpen ? classes.main : classes.main2}>
-          <Switch>
-            <Route path={'/profile/:userId?'}>
-              <ProfileContainer />
-            </Route>
-            <Route path={'/dialogs'}>
-              <DialogsContainer />
-            </Route>
-            <Route path={'/users'}>
-              <UsersContainer />
-            </Route>
-            <Route path={'/login'}>
-              <Login />
-            </Route>
-          </Switch>
-        </Paper>
-      </Grid>
-    </Paper>
+    <Grid className={`${classes.root} ${menuOpen ? 'menuOpen' : ''}`}>
+      {location.pathname !== '/login' && <>
+        <Header menuOpen={menuOpen} switchTheme={props.switchTheme} />
+        <Navbar setMenuOpen={onMenuBtnClick} menuOpen={menuOpen} />
+      </>}
+      <Box className={`${location.pathname === '/login' ? classes.fullWidth : (menuOpen ? classes.main : classes.main2)}`}>
+        <Routes />
+      </Box>
+    </Grid >
   );
 }
 
-const mapToStateProps = (state) => ({
-  initialized: state.app.initialized
-})
-
-export default compose(
-  withRouter,
-  connect(mapToStateProps, { initializeApp }),
-  withTheme
-)(App);
+export default withTheme(App)
