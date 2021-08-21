@@ -1,25 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Profile from './Profile';
 import { connect } from 'react-redux';
 import {
     addPost, getProfile,
     getStatus, updateStatus,
-} from '../../redux/profile-reducer'
+    updateUserPhoto
+} from '../../redux/profile-reducer';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { withRouter } from "react-router";
 import { compose } from 'redux';
 
-class ProfileContainer extends React.Component {
-    componentDidMount() {
-        let userId = this.props.match.params.userId;
-        if (!userId) {
-            userId = this.props.userId
-        }
-        this.props.getProfile(userId);
-        this.props.getStatus(userId);
+
+
+function ProfileContainer(props) {
+    const { getProfile, getStatus } = props;
+    let userId = props.match.params.userId;
+    if (!userId) {
+        userId = props.userId
     }
-    render() {
-        return <Profile {...this.props} status={this.props.status} />
-    }
+
+    useEffect(() => {
+        getProfile(userId);
+        getStatus(userId);
+    }, [getProfile, getStatus, userId])
+
+    return <Profile {...props} status={props.status} />
 }
 
 let mapToStateProps = (state) => ({
@@ -37,7 +42,8 @@ export default compose(
         getProfile,
         getStatus,
         updateStatus,
-
+        updateUserPhoto
     }),
     withRouter,
+    withAuthRedirect,
 )(ProfileContainer);

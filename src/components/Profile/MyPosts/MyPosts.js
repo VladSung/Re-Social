@@ -1,17 +1,12 @@
 import React from 'react';
 import Post from './Post/Post'
 import MyPostsForm from './MyPostsForm'
-import { Container, Paper } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        display: 'flex',
         width: '100%',
-    },
-    list: {
-        padding: '10px 15px',
-        background: theme.palette.background.default,
     }
 }))
 
@@ -21,16 +16,14 @@ const MyPosts = (props) => {
         : "Нет Постов";
 
     return (
-        <Paper>
-            <Container maxWidth='md' className={classes.root}>
-                <div>
-                    <MyPostsForm addPost={props.addPost} />
-                </div>
-                <div className={classes.list}>
-                    {Posts}
-                </div>
-            </Container>
-        </Paper>
+        <Container maxWidth='md' className={classes.root}>
+            <div>
+                <MyPostsForm addPost={props.addPost} />
+            </div>
+            <div className={classes.list}>
+                {Posts}
+            </div>
+        </Container>
     );
 };
 export default MyPosts;

@@ -1,58 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Input, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
-class ProfileStatus extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            editMode: false,
-            status: this.props.status
-        }
+const useStyles = makeStyles(theme => ({
+    userStatus: {
+        width: '100%',
+    },
+}))
+
+const ProfileStatus = (props) => {
+    const classes = useStyles();
+    const [editMode, setEditMode] = useState(false);
+    const [status, setStatus] = useState(props.status);
+    useEffect(() => {
+        setStatus(props.status)
+    }, [props.status])
+
+    const onEditStatus = (e) => {
+        setStatus(e.target.value)
     }
-    editStatus = (newStatus) => {
-        this.setState({
-            status: newStatus
-        })
+    const activatedEditMode = () => {
+        setEditMode(true)
     }
-    activatedEditMode = () => {
-        this.setState({
-            editMode: true
-        })
-    }
-    deactivatedEditMode = () => {
-        this.setState({
-            editMode: false
-        })
+    const deactivatedEditMode = () => {
+        setEditMode(false)
 
     }
-    onKeyDown = (e) => {
+    const updateStatus = (e) => {
         if (e.key === 'Enter') {
-            this.props.updateStatus(this.state.status)
-            this.deactivatedEditMode();
+            props.updateStatus(status)
+            deactivatedEditMode();
         }
     }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.status !== this.props.status) {
-            this.setState({
-                status: this.props.status
-            })
-        }
-    }
-
-    render() {
-        return <>
-            {this.state.editMode && <Input
-                style={{ width: '100%', padding: '0 15px' }}
-                value={this.state.status}
-                onKeyDown={this.onKeyDown}
+    return (
+        <>
+            {editMode && <Input
+                className={classes.userStatus}
+                value={status}
+                onKeyDown={updateStatus}
                 autoFocus={true}
-                onChange={(e) => { this.editStatus(e.target.value) }} onBlur={this.deactivatedEditMode} />
+                onChange={onEditStatus} onBlur={deactivatedEditMode} />
             }
-            {!this.state.editMode && <Typography onDoubleClick={this.activatedEditMode}>{this.state.status || 'Нет статуса'}</Typography>}
+            {!editMode && <Typography variant='body1' className={classes.userStatus} onDoubleClick={activatedEditMode}>{status || 'Нет статуса'}</Typography>}
 
         </>
-    }
+    )
 }
 
 export default ProfileStatus;

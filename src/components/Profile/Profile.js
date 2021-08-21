@@ -6,7 +6,7 @@ import ProfileInfo from './ProfileInfo/ProfileInfo'
 function Profile(props) {
     return (
         <Grid>
-            <ProfileInfo updateStatus={props.updateStatus} profile={props.profile} status={props.status} />
+            <ProfileInfo updateUserPhoto={props.updateUserPhoto} updateStatus={props.updateStatus} profile={props.profile} status={props.status} />
             <MyPosts {...props} />
         </Grid>
     );
