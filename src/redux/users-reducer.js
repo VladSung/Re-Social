@@ -10,7 +10,7 @@ const SET_FOLLOW_FETCHING = 'SET_FOLLOW_FETCHING';
 let initialState = {
     users: [],
     currentPage: 1,
-    pageSize: 5,
+    pageSize: 9,
     usersCount: 0,
     isFetching: false,
     followFetching: [],
@@ -54,7 +54,6 @@ function usersReducer(state = initialState, action) {
             return {
                 ...state,
                 followFetching: state.followFetching.some(id => id === action.userId)
-                    // ? [...state.followFetching.filter(id => id !== action.userId)]
                     ? state.followFetching.filter((id) => id !== action.userId)
                     : [...state.followFetching, action.userId]
             }
@@ -80,12 +79,12 @@ export const getUsers = (currentPage, pageSize) => (dispatch) => {
         dispatch(setUsersCount(data.totalCount));
     })
 }
-export const toggleFollow = (userId, followed) => (dispatch) => {
+export const toggleFollow = (userId, followed) => async (dispatch) => {
     dispatch(setFollowFetching(userId));
-    usersAPI.toggleFollow(userId, followed).then((res) => {
-        res && dispatch(toggleFollowSuccess(userId));
-    }).finally(() => {
-        dispatch(setFollowFetching(userId))
-    })
+    const res = await usersAPI.toggleFollow(userId, followed)
+    if (res) {
+        dispatch(toggleFollowSuccess(userId));
+    }
+    dispatch(setFollowFetching(userId))
 }
 export default usersReducer;

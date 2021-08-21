@@ -9,55 +9,61 @@ const instance = axios.create({
 })
 
 export const usersAPI = {
-    getUsers(currentPage, pageSize = 5) {
-        return instance.get(`/users?page=${currentPage}&count=${pageSize}`)
-            .then(res => res.data)
+    async getUsers(currentPage, pageSize = 5) {
+        const res = await instance.get(`/users?page=${currentPage}&count=${pageSize}`)
+        return res.data
     },
-    toggleFollow(userId, followed) {
+    async toggleFollow(userId, followed) {
         if (followed) {
-            return instance.delete(`follow/${userId}`)
-                .then(res => {
-                    if (res.data.resultCode === 0) {
-                        return true
-                    }
-                })
+            const res = await instance.delete(`follow/${userId}`)
+            if (res.data.resultCode === 0) {
+                return true
+            }
         } else {
-
-            return instance.post(`follow/${userId}`)
-                .then(res => {
-                    if (res.data.resultCode === 0) {
-                        return true
-                    }
-                })
+            const res = await instance.post(`follow/${userId}`)
+            if (res.data.resultCode === 0) {
+                return true
+            }
         }
 
     },
 }
 export const authAPI = {
-    me() {
-        return instance.get(`auth/me`)
-            .then(res => res.data)
+    async me() {
+        const res = await instance.get(`auth/me`)
+        return res.data
     },
-    login(email, password, rememberMe) {
-        return instance.post(`auth/login`, {
+    async login(email, password, rememberMe) {
+        const res = await instance.post(`auth/login`, {
             email,
             password,
             rememberMe
-        }).then(res => res.data)
+        })
+        return res.data
     }
 
 }
 export const profileAPI = {
-    getProfile(userId) {
-        return instance.get(`/profile/${userId}`)
-            .then(res => res.data)
+    async getProfile(userId) {
+        const res = await instance.get(`/profile/${userId}`)
+        return res.data
     },
-    getStatus(userId) {
-        return instance.get(`/profile/status/${userId}`)
-            .then(res => res.data)
+    async getStatus(userId) {
+        const res = await instance.get(`/profile/status/${userId}`)
+        return res.data
     },
-    updateStatus(status) {
-        return instance.put(`/profile/status/`, { status })
-            .then(res => res.data)
+    async updateStatus(status) {
+        const res = await instance.put(`/profile/status/`, { status })
+        return res.data
+    },
+    async uploadPhoto(image) {
+        const formData = new FormData();
+        formData.append("image", image)
+        const res = await instance.post('profile/photo', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+        return res.data
     }
 }

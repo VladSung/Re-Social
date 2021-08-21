@@ -8,7 +8,6 @@ let initialState = {
     email: null,
     id: null,
     isAuth: false,
-    authErrors: {}
 };
 function authReducer(state = initialState, action) {
     switch (action.type) {
@@ -31,23 +30,20 @@ function authReducer(state = initialState, action) {
 export const setAuthUserData = (data) => ({ type: SET_USER_DATA, data });
 export const setAuthErrors = (fieldErrors, errorMessages) => ({ type: SET_USER_DATA, fieldErrors, errorMessages });
 
-export const getAuthData = () => (dispatch) => {
-    return authAPI.me()
-        .then(data => {
-            if (data.resultCode === 0) {
-                dispatch(setAuthUserData(data.data));
-            }
-        })
+export const getAuthData = () => async (dispatch) => {
+    const data = await authAPI.me();
+    if (data.resultCode === 0) {
+        dispatch(setAuthUserData(data.data));
+    }
+    return data
 }
-export const getLogin = ({ email, password, rememberMe = false }) => (dispatch) => {
-    authAPI.login(email, password, rememberMe)
-        .then(data => {
-            if (data.resultCode === 0) {
-                dispatch(getAuthData());
-            } else {
-                dispatch(data.fieldsErrors, data.messages[0])
-            }
-        })
+export const getLogin = ({ email, password, rememberMe = false }) => async (dispatch) => {
+    const data = await authAPI.login(email, password, rememberMe)
+    if (data.resultCode === 0) {
+        dispatch(getAuthData());
+    } else {
+        dispatch(setAuthErrors(data.fieldsErrors, data.messages[0]))
+    }
 }
 
 export default authReducer;

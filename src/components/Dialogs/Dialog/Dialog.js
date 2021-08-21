@@ -11,7 +11,7 @@ function Dialog({ dialogs }) {
             {dialogs.map((user) => <li key={user.id} className={styles.dialog}>
                 <NavLink activeClassName={styles.active} to={`${match.url}/${user.id}`}>
                     <div className={styles.userPhoto}>
-                        <img src={user.photo} alt='' />
+                        <img src={user.photos.small} alt='' />
                     </div>
                     <p>{user.name}</p>
                 </NavLink>

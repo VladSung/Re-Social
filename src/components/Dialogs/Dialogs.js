@@ -3,7 +3,7 @@ import styles from './dialogs.module.css'
 import Dialog from './Dialog/Dialog';
 import Messages from './Messages/Messages';
 import DialogsForm from './DialogsForm'
-import { Skeleton } from '@material-ui/core';
+import { Skeleton } from '@material-ui/lab';
 
 function Dialogs(props) {
     let profile = props.profile

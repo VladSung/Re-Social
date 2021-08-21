@@ -16,14 +16,15 @@ class UsersContainer extends React.Component {
     onPaginationClick = (p) => {
         this.props.getUsers(p, this.props.pageSize)
     }
-    toggleFollow = (id, followed) => {
-        this.props.toggleFollow(id, followed)
+    toggleFollow = (userId) => {
+        let [user] = this.props.users.filter(u => u.id === userId);
+        this.props.toggleFollow(userId, user.followed)
     }
     render() {
         return <>
             {this.props.isFetching ? <Preloader /> :
                 <Users
-                    toggleFollow={this.toggleFollow}
+                    onToggleFollow={this.toggleFollow}
                     onPaginationClick={this.onPaginationClick}
                     usersCount={this.props.usersCount}
                     pageSize={this.props.pageSize}

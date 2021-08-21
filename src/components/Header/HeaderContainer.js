@@ -8,6 +8,7 @@ function HeaderContainer(props) {
     let login = useSelector(state => state.auth.login, shallowEqual)
     return (
         <Header
+            switchTheme={props.switchTheme}
             isAuth={isAuth}
             login={login}
             menuOpen={menuOpen} />

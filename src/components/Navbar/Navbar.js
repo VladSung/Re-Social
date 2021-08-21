@@ -6,14 +6,15 @@ import { List, ListItem, ListItemIcon, ListItemText, Divider, Box, IconButton, D
 import { NavLink } from 'react-router-dom';
 import {
     Home as HomeIcon,
+    HomeOutlined as HomeOutlinedIcon,
     Settings as SettingsIcon,
     Message as MessageIcon,
     People as PeopleIcon,
-    List as ListIcon,
+    List as ArticleIcon,
     Menu as MenuIcon,
     MenuOpen as MenuOpenIcon
 } from '@material-ui/icons'
-
+// import ArticleIcon from '@material-ui/icons/Article';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => {
@@ -117,7 +118,7 @@ function Navbar(props) {
             <List className={classes.navbar}>
                 <li>
                     <ListItem button activeClassName={classes.active} to='/profile' component={NavLink}>
-                        <ListItemIcon><HomeIcon /></ListItemIcon>
+                        <ListItemIcon><HomeOutlinedIcon /></ListItemIcon>
                         <ListItemText primary='Профиль' />
                     </ListItem>
                 </li>
@@ -135,7 +136,7 @@ function Navbar(props) {
                 </li>
                 <li>
                     <ListItem activeClassName={classes.active} button to='/news' component={NavLink}>
-                        <ListItemIcon><ListIcon /></ListItemIcon>
+                        <ListItemIcon><ArticleIcon /></ListItemIcon>
                         <ListItemText primary='Новости' />
                     </ListItem>
                 </li>

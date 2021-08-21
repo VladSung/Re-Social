@@ -6,10 +6,6 @@ const SET_STATUS = 'SET_STATUS'
 
 let initialState = {
     profile: null,
-    photos: {
-        small: '',
-        large: '',
-    },
     posts: [],
     status: ''
 };
@@ -39,33 +35,25 @@ export const addPostSuccess = (newPost) => ({ type: ADD_POST, newPost })
 export const setProfile = (profile) => ({ type: SET_PROFILE, profile })
 export const setStatus = (status) => ({ type: SET_STATUS, status })
 
-export const getProfile = (userId) => (dispatch) => {
-    if (userId === 'initialize') {
-        dispatch(setProfile({}));
-        return;
-    }
-    profileAPI.getProfile(userId)
-        .then(data => {
-            dispatch(setProfile(data));
-        })
+export const getProfile = (userId) => async (dispatch) => {
+    const data = await profileAPI.getProfile(userId)
+    dispatch(setProfile(data));
 }
-export const getStatus = (userId) => (dispatch) => {
-    if (userId === 'initialize') {
-        dispatch(setProfile({}));
-        return;
-    }
-    profileAPI.getStatus(userId)
-        .then(data => {
-            dispatch(setStatus(data));
-        })
+export const getStatus = (userId) => async (dispatch) => {
+    const data = await profileAPI.getStatus(userId)
+    dispatch(setStatus(data));
 }
-export const updateStatus = (status) => (dispatch) => {
-    profileAPI.updateStatus(status)
-        .then(data => {
-            if (data.resultCode === 0) {
-                dispatch(setStatus(status))
-            }
-        })
+export const updateStatus = (status) => async (dispatch) => {
+    const data = await profileAPI.updateStatus(status)
+    if (data.resultCode === 0) {
+        dispatch(setStatus(status))
+    }
+}
+export const updateUserPhoto = (userId, image) => async (dispatch) => {
+    const data = await profileAPI.uploadPhoto(image)
+    if (data.resultCode === 0) {
+        dispatch(getProfile(userId))
+    }
 }
 export const addPost = (postBody) => (dispatch) => {
     const newPost = {

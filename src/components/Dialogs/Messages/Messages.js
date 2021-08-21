@@ -4,7 +4,7 @@ import styles from './messages.module.css'
 
 function Messages(props) {
     let messagesData = props.messages.map((e) => {
-        if (props.profile.id === e.userId) {
+        if (props.profile.userId === e.userId) {
             return (<Message key={e.id} meMessage={true} profile={props.profile} message={e.message}></Message>
             )
         } else {

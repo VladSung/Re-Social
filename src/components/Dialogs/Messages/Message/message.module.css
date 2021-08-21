@@ -17,13 +17,6 @@
 .authorName{
     font-size: 12px;
 }
-.userPhoto{
-    width: 50px;
-    height: 50px;
-    display: flex;
-    border-radius: 50%;
-    overflow: hidden;
-}
 .userPhoto img{
     width: 100%;
     object-fit: cover;
@@ -34,8 +27,6 @@
     margin-top: 8px;
     padding: 5px 15px;
     border-radius: 15px;
-    background: #171a21;
+    /* background: #171a21; */
     color: #cfd5e2;
-    line-height: 1.5;
-    min-height: 34px;
 }
