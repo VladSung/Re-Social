@@ -1,35 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ThemeProvider } from '@material-ui/styles';
+import { CssBaseline } from '@material-ui/core';
 import { createTheme } from '@material-ui/core/styles';
-import { blue } from '@material-ui/core/colors';
+import { red } from '@material-ui/core/colors';
 
-let theme = createTheme({
-    palette: {
-        mode: 'light',
-        primary: {
-            main: blue[500],
+export const withTheme = (Component) => (props) => {
+    const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode') ? localStorage.getItem('darkMode') : false)
+    const theme = createTheme({
+        palette: {
+            type: darkMode ? 'dark' : 'light',
+            primary: {
+                main: '#065fd4'//'#f3bb68'
+            },
+            secondary: {
+                main: red[500]
+            },
+
+            background: {
+                default: darkMode ? '#212121' : '#f3f3f3',
+                paper: darkMode ? '#424242' : '#f5f5f5',
+            },
         },
-        secondary: {
-            main: 'rgb(0 0 255)',
+        typography: {
+            fontFamily: [
+                'system-ui',
+                '-apple-system',
+                '"Segoe UI"',
+                'Roboto',
+                'Ubuntu',
+                'sans-serif'
+            ].join(','),
         },
-    },
-});
-theme = createTheme({
-    ...theme,
-    components: {
-        MuiPaper: {
-            root: {
-                background: theme.palette.background.default,
-            }
+    })
+    window.theme = theme;
+    const switchTheme = (props) => {
+        setDarkMode(!darkMode)
+        if (!darkMode) {
+            localStorage.setItem('darkMode', !darkMode)
+        } else {
+            localStorage.removeItem('darkMode')
         }
     }
-})
-
-window.theme = theme
-export const withTheme = (Component) => (props) => {
     return (
-        <ThemeProvider theme={theme}>
-            <Component {...props} />
+        <ThemeProvider theme={theme} >
+            <CssBaseline />
+            <Component {...props} switchTheme={switchTheme} />
         </ThemeProvider>
-    )
+    );
 }
+
+
