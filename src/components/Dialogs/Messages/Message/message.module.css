@@ -1,0 +1,32 @@
+.message{
+    display: grid;
+    margin-bottom: 15px;
+    grid-template-columns: 50px 1fr;
+    gap: 15px;
+}
+.userMessage{
+    margin-right: auto;
+}
+.meMessage{
+    grid-template-columns: 1fr 50px;
+    margin-left: auto;
+}
+.meMessage .userPhoto{
+    order: 2;
+}
+.authorName{
+    font-size: 12px;
+}
+.userPhoto img{
+    width: 100%;
+    object-fit: cover;
+}
+.messageText{
+    display: inline-block;
+    align-self: baseline;
+    margin-top: 8px;
+    padding: 5px 15px;
+    border-radius: 15px;
+    /* background: #171a21; */
+    color: #cfd5e2;
+}
